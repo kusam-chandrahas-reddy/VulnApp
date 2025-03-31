@@ -7,7 +7,7 @@ def index():
 
 @app.route('/auth', methods=['GET','POST'])
 def login():
-    if session['username']:
+    if 'username' in session:
         return redirect(url_for('dashboard'))
     if request.method=='GET':
         return render_template('login.html')
@@ -34,7 +34,7 @@ def error404(error):
 
 @app.route('/logout')
 def logout():
-    if session['username']:
+    if 'username' in session:
         session.pop('username')
     return redirect(url_for('login'))
 
