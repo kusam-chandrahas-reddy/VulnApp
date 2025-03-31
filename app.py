@@ -10,7 +10,7 @@ def login():
     if request.method=='GET':
         return render_template('login.html')
     elif request.method=='POST':
-        return redirect(url_for('login'))
+        return redirect(url_for('dashboard'))
     else:
         return 'Unsupported Method'
 
