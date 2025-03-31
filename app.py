@@ -21,7 +21,7 @@ def dashboard():
 @app.errorhandler(404)
 def error404(error):
     resp=make_response(render_template('error.html',error='Page Not Found'))
-    resp.headers['Strict-Transport-Security']='max-age=3100; includeSubDomains'
+    resp.headers['error-status']=404
     return resp
 
 if __name__=='__main__':
