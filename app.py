@@ -14,7 +14,7 @@ def login():
     elif request.method=='POST':
         username=request.form['username']
         print(username)
-        if username in ['chandrahas,admin,guest,frontenduser,dev']:
+        if username in ['chandrahas','admin','guest','frontenduser','dev']:
             session['username']=username
             return redirect(url_for('dashboard'))
         else:
