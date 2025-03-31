@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 app =Flask(__name__)
 
 @app.route('/')
@@ -10,11 +10,13 @@ def login():
     if request.method=='GET':
         return render_template('login.html')
     elif request.method=='POST':
-        return render_template('dashboard.html')
+        return redirect(url_for('login'))
     else:
         return 'Unsupported Method'
 
-
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
 
 
 
