@@ -16,9 +16,11 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('dashboard.html',username="Chandrahas")
 
-
+@app.errorhandler(404)
+def error404(error):
+    return render_template('error.html',error='Page Not Found')
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', debug=True, port=5500)
