@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for, make_response
 app =Flask(__name__)
 
 @app.route('/')
@@ -20,7 +20,9 @@ def dashboard():
 
 @app.errorhandler(404)
 def error404(error):
-    return render_template('error.html',error='Page Not Found')
+    resp=make_response(render_template('error.html',error='Page Not Found'))
+    resp.headers['Strict-Transport-Security']='max-age=10'
+    return resp
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', debug=True, port=5500)
