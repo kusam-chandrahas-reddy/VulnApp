@@ -8,7 +8,7 @@ def index():
 @app.route('/auth', methods=['GET','POST'])
 def login():
     if request.method=='GET':
-        return render_template('auth.html')
+        return render_template('login.html')
     elif request.method=='POST':
         return render_template('dashboard.html')
     else:
