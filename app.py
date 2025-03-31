@@ -16,6 +16,8 @@ def login():
         if username in ['chandrahas,admin,guest,frontenduser,dev']:
             session['username']=username
             return redirect(url_for('dashboard'))
+        else:
+            return render_template('login.html')
     else:
         return 'Unsupported Method'
 
