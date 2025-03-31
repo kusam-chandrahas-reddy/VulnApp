@@ -15,7 +15,7 @@ def login():
         username=request.form.get('username')
         if username in ['chandrahas,admin,guest,frontenduser,dev']:
             session['username']=username
-        return redirect(url_for('dashboard'))
+            return redirect(url_for('dashboard'))
     else:
         return 'Unsupported Method'
 
