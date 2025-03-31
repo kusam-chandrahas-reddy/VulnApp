@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, request, url_for, make_response, session
 app =Flask(__name__)
+app.secret_key=b'mypowerfulsecretkey'
 
 @app.route('/')
 def index():
