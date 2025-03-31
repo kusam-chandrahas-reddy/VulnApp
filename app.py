@@ -12,7 +12,8 @@ def login():
     if request.method=='GET':
         return render_template('login.html')
     elif request.method=='POST':
-        username=request.form.get('username')
+        username=request.form['username']
+        print(username)
         if username in ['chandrahas,admin,guest,frontenduser,dev']:
             session['username']=username
             return redirect(url_for('dashboard'))
