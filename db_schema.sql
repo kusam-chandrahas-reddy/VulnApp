@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS users (
 	fullname TEXT NOT NULL
 );
 
-INSERT INTO users (username, email, password, fullname) VALUES ('sectester', 'sectester@example.com','mypasswordisempty','Security Tester');
-INSERT INTO users (username, email, password, fullname) VALUES ('root', 'root@example.com','mypasswordistoor','ROOT User');
+INSERT OR IGNORE INTO users (username, email, password, fullname) VALUES ('sectester', 'sectester@example.com','mypasswordisempty','Security Tester');
+INSERT OR IGNORE INTO users (username, email, password, fullname) VALUES ('root', 'root@example.com','mypasswordistoor','ROOT User');
