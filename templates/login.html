@@ -3,7 +3,11 @@
 {% block title%}Login{%endblock%}
 
 {% block content%}
-	
+{% if message %}
+<div class="alert alert-warning mb-3" role="alert">
+	{{message}}
+</div>
+{% endif %} 
 	<div class="container align-self-center">
 	<h3 class='mb-3'>Enter Username & Password</h3>
 	<form class="g-3" method='post' action='/auth'>

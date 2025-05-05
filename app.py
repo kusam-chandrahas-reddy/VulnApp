@@ -66,8 +66,10 @@ def login():
             if password == usersdict[username]:
                 session['username']=username
                 return redirect(url_for('dashboard'))
+            else:
+                return render_template('login.html',message="Password is incorrect")
         else:
-            return render_template('login.html')
+            return render_template('login.html',message="Username is incorrect")
     else:
         return 'Unsupported Method'
 
