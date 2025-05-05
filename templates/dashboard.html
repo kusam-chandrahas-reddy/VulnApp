@@ -1,11 +1,26 @@
-<!doctype html>
-<html>
-	<head>
-		<title>Vulnerable Web App</title>
-	</head>
-	<body>
-		<h3>Welcome, {{username}}</h3>
-		<p>You are viewing post authenticated page. </br>
-		Click here to <a href="/logout">Logout</a></p>
-	</body>
-</html>
+{% extends "base.html" %}
+
+{% block title%}Dashboard{%endblock%}
+
+{%block content%}
+<h3>Welcome, {{username}}</h3>
+<p>You are viewing post authenticated page. </br>
+Click here to <a href="/logout">Logout</a></p>
+{%endblock%}
+
+{%block login %} <a href='/logout'><button class="btn btn-outline-success me-2" type="button">Logout</button> </a>{%endblock%}
+
+{% block nav-menuitem%}
+<li class="nav-item dropdown">
+	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	  My Account
+	</a>
+	<ul class="dropdown-menu">
+	  <li><a class="dropdown-item" href="#">My Profile</a></li>
+	  <li><a class="dropdown-item" href="#">Change Password</a></li>
+	  <li><hr class="dropdown-divider"></li>
+	  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+	</ul>
+</li>
+{%endblock%}
+
