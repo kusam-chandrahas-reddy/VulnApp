@@ -1,8 +1,6 @@
-<!doctype html>
+{% extends "base.html" %}
 
-<html>
-	<head><title>Vulnerable Web App</title></head>
-	<body>
+{% block content%}
 		<h3>Enter Credentials</h3>
 		<form method='post' action='/auth'>
 			<label>Username</label> <input type='text' name='username' width='100'/></br>
@@ -10,6 +8,6 @@
 			<input type="submit" name='submit' value="Authenticate" />
 
 		</form>
-			
-	</body>
-</html>
+{%endblock%}
+
+{%block login %} <button class="btn btn-outline-success me-2" type="button">Login</button> {%endblock%}
