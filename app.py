@@ -32,7 +32,7 @@ def init_db():
 #list of users
 def lusers(cols='*'):
     db = get_db()
-    cur = db.execute('SELECT {1} FROM users'.format(cols))
+    cur = db.execute('SELECT {} FROM users'.format(cols))
     users = cur.fetchall()
     return 'Users: ' + str(users)
 
