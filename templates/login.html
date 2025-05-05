@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
 {% block content%}
-	<h3>Enter Credentials</h3>
+	
 	<div class="container">
+	<h3 class='mb-3'>Enter Username & Password</h3>
 	<form class="g-3" method='post' action='/auth'>
 		<div class="row form-floating col-md-3 mb-3">
-			<input type="email" name='username' name='password' class="form-control" id="floatingInput" placeholder="name@example.com">
-			<label for="floatingInput">Email address</label>
+			<input type="text" name='username' class="form-control" id="floatingInput" placeholder="username">
+			<label for="floatingInput">Username</label>
 		  </div>
 		  <div class="row form-floating col-md-3 mb-3">
-			<input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+			<input type="password" class="form-control" name='password' id="floatingPassword" placeholder="Password">
 			<label for="floatingPassword">Password</label>
 		</div>
 		<div class="row form-floating col-md-3 mb-3">
