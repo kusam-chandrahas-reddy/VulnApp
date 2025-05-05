@@ -5,7 +5,9 @@
 {% block content%}
 
 <div class="container align-self-center">
-	<p class='mb-3'>{{message}}</p>
+	<div class="alert alert-warning" role="alert">
+		{{message}}
+	  </div>
 	<h3 class='mb-3'>Registration Page</h3>
 	<form class="g-3" method='post' action='/register'>
 		<div class="row form-floating col-md-3 mb-3">
