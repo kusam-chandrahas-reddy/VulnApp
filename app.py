@@ -2,6 +2,8 @@ from flask import Flask, redirect, render_template, request, url_for, make_respo
 app =Flask(__name__)
 app.secret_key=b'mypowerfulsecretkey'
 
+userslist = ['chandrahas','admin','guest','frontenduser','dev']
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -14,8 +16,8 @@ def login():
         return render_template('login.html')
     elif request.method=='POST':
         username=request.form['username']
-        print(username)
-        if username in ['chandrahas','admin','guest','frontenduser','dev']:
+        print('Username:',username)
+        if username in userslist:
             session['username']=username
             return redirect(url_for('dashboard'))
         else:
@@ -41,6 +43,24 @@ def logout():
     if 'username' in session:
         session.pop('username')
     return redirect(url_for('login'))
+
+@app.route('/register', methods=['GET','POST'])
+def register():
+    if 'username' in session:
+        return redirect(url_for('dashboard'))
+    if request.method=='GET':
+        return render_template('register.html')
+    elif request.method=='POST':
+        username=request.form['username']
+        print('Username:',username)
+        if username not in userslist:
+            userslist.append(username)
+            session['username']=username
+            return redirect(url_for('dashboard'))
+        else:
+            return render_template('register.html')
+    else:
+        return 'Unsupported Method'
 
 
 if __name__=='__main__':
