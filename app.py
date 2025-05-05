@@ -116,7 +116,7 @@ def register():
         usernames=[x[0] for x in lusers('username')]
         if username not in usernames:
             #userslist.append(username)
-            query="insert into OR IGNORE INTO users (username, email, password, fullname) VALUES (?,?,?,?);"
+            query="INSERT OR IGNORE INTO users (username, email, password, fullname) VALUES (?,?,?,?)"
             data=(username,email,password,fullname)
             out=runquery(query,data)
             if out==1:
