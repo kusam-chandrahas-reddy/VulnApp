@@ -44,7 +44,7 @@ userslist = ['chandrahas','admin','guest','frontenduser','dev']
 @app.route('/')
 def index():
     listusers=lusers()
-    return render_template('index.html',listusers)
+    return render_template('index.html',listusers=listusers)
 
 @app.route('/auth', methods=['GET','POST'])
 def login():
