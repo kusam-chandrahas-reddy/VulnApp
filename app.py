@@ -58,7 +58,7 @@ def register():
             session['username']=username
             return redirect(url_for('dashboard'))
         else:
-            return render_template('register.html')
+            return render_template('register.html',message="Error occurred in Registration, Please Try Again")
     else:
         return 'Unsupported Method'
 
