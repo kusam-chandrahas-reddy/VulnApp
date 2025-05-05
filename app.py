@@ -100,8 +100,14 @@ def register():
         return render_template('register.html')
     elif request.method=='POST':
         username=request.form['username']
+        password=request.form['password']
+        fullname=request.form['fullname']
+        email=request.form['email']
         print('Username:',username)
-        if username not in userslist:
+        ss=lusers('username')
+        print(ss)
+        usersli=dict(ss)
+        if username not in usersli:
             userslist.append(username)
             session['username']=username
             return redirect(url_for('dashboard'))
