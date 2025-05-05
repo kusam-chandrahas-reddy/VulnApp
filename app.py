@@ -36,6 +36,15 @@ def lusers(cols='*'):
     users = cur.fetchall()
     return users
 
+def runquery(query,data):
+    db = get_db()
+    cur=db.cursor()
+    cur.execute(query,data)
+    db.commit()
+    return cur.rowcount
+    #users = cur.fetchall()
+    #return users
+
 ######################################################
 
 
@@ -104,17 +113,20 @@ def register():
         fullname=request.form['fullname']
         email=request.form['email']
         print('Username:',username)
-        ss=lusers('username')
-        print(ss)
-        usersli=dict(ss)
-        if username not in usersli:
-            userslist.append(username)
-            session['username']=username
-            return redirect(url_for('dashboard'))
-        else:
-            return render_template('register.html',message="Error occurred in Registration, Please Try Again")
-    else:
-        return 'Unsupported Method'
+        usernames=[x[0] for x in lusers('username')]
+        if username not in usernames:
+            #userslist.append(username)
+            query="insert into OR IGNORE INTO users (username, email, password, fullname) VALUES (?,?,?,?);"
+            data=(username,email,password,fullname)
+            out=runquery(query,data)
+            if out==1:
+                message='Registered Successfully'
+                session['username']=username
+                return redirect(url_for('dashboard'))
+            else: return render_template('register.html',message='Registration Failed, Please Try Again')
+            
+        else:   return render_template('register.html',message="Error occurred in Registration, Please Try Again")
+    else:   return 'Unsupported Method'
 
 
 if __name__=='__main__':
