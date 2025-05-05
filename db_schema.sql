@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS users (
 	id INTEGER AUTO_INCREMENT,
-    username TEXT PRIMARY KEY NOT NULL,
+    username TEXT PRIMARY KEY,
     email TEXT NOT NULL,
 	password TEXT NOT NULL,
 	fullname TEXT NOT NULL
