@@ -2,11 +2,49 @@ from flask import Flask, redirect, render_template, request, url_for, make_respo
 app =Flask(__name__)
 app.secret_key=b'mypowerfulsecretkey'
 
+
+#########################
+
+import sqlite3
+from flask import g
+
+DATABASE = 'database.db'
+
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+    return db
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
+def init_db():
+    with app.app_context():
+        db = get_db()
+        with app.open_resource('schema.sql', mode='r') as f:
+            db.cursor().executescript(f.read())
+        db.commit()
+
+#list of users
+def lusers():
+    db = get_db()
+    cur = db.execute('SELECT * FROM users')
+    users = cur.fetchall()
+    return 'Users: ' + str(users)
+
+######################################################
+
+
 userslist = ['chandrahas','admin','guest','frontenduser','dev']
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    listusers=lusers()
+    return render_template('index.html',listusers)
 
 @app.route('/auth', methods=['GET','POST'])
 def login():
@@ -64,4 +102,5 @@ def register():
 
 
 if __name__=='__main__':
+    init_db()
     app.run(host='0.0.0.0', debug=True, port=5500)
