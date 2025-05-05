@@ -1,17 +1,12 @@
 {% extends "base.html" %}
 
-{% block title%}Index Page{%endblock%}
+{% block title%}Index{%endblock%}
+
 {%block content%}
 <h1>Index page of the application</h1>
+<h1 class="text-primary"> Vulnerable Web App	</h1>
+  <p> This is a vulnerable web app, has a lot of vulnerable scenarios we observe in web application from beginner to Critical level.</p>
+  <span>!Enjoy exploring the application!</span>
 {%endblock%}
+
 {%block login %} <button class="btn btn-outline-success me-2" type="button">Login</button> {%endblock%}
-<!doctype html>
-<html>
-	<head>
-		<title>Vulnerable Web App</title>
-	</head>
-	<body>
-		<h3>Welcome to my application</h3>
-		<p>You can use this link to login to the application <a href="/auth">Login</a></p>
-	</body>
-</html>

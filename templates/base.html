@@ -11,10 +11,7 @@
 	<title>{% block title %}{% endblock %} - My App</title>
 
 </head>
-  <body>
-    <h1 class="text-primary">
-        Get started with Bootstrap
-	</h1>
+<body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
@@ -52,6 +49,7 @@
       </div>
     </div>
   </nav>
+  
   <!--
   <nav class="navbar navbar-dark bg-primary">
     <!-- Navbar content - ->
@@ -60,14 +58,34 @@
   <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
     <!-- Navbar content - ->
   </nav> -->
-{% block content %}{%endblock%}
+  {% block content %}{%endblock%}
+
 
     <!-- Bootstrap Javascripts -->  
    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     -->
+
+    <div class="container">
+      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <p class="col-md-4 mb-0 text-body-secondary">© 2025 Company, Inc</p>
+    
+        <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none" aria-label="Bootstrap">
+          <svg class="bi me-2" width="40" height="32" aria-hidden="true"><use xlink:href="#bootstrap"></use></svg>
+        </a>
+    
+        <ul class="nav col-md-4 justify-content-end">
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
+          <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+        </ul>
+      </footer>
+    </div>
 	<script src="./../static/bootstrap-5..0.2-dist/js/bootstrap.bundle.min.js"></script>
 	
 
-  </body>    
+</body>    
+
 </html>
