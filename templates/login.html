@@ -4,7 +4,7 @@
 	<h3>Enter Credentials</h3>
 	<div class="container">
 	<form class="g-3" method='post' action='/auth'>
-		<div class="row form-floating mb-3 col-md-3">
+		<div class="row form-floating col-md-3">
 			<input type="email" name='username' name='password' class="form-control" id="floatingInput" placeholder="name@example.com">
 			<label for="floatingInput">Email address</label>
 		  </div>
@@ -12,17 +12,17 @@
 			<input type="password" class="form-control" id="floatingPassword" placeholder="Password">
 			<label for="floatingPassword">Password</label>
 		</div>
-		<div class="row form-floating col-md-2">
-			<button type="submit" class="btn btn-primary mb-3">Confirm identity</button>
+		<div class="row form-floating col-md-3">
+			<button type="submit" class="btn btn-primary">Confirm identity</button>
 		</div>
-	</form>
+	</div>
+	<!--</form>
 		<form method='post' action='/auth'>
 			<label>Username</label> <input type='text' name='username' width='100'/></br>
 			<label>Password</label> <input type='password' name='password' width='100'/>
 			<input type="submit" name='submit' value="Authenticate" />
 
-		</form>
-	</div>
+		</form>-->
 {%endblock%}
 
 {%block login %} <a href='./auth'><button class="btn btn-outline-success me-2" type="button">Login</button> </a>{%endblock%}
