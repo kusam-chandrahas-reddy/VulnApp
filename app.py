@@ -34,7 +34,7 @@ def lusers(cols='*'):
     db = get_db()
     cur = db.execute('SELECT {} FROM users'.format(cols))
     users = cur.fetchall()
-    return 'Users: ' + str(users)
+    return users
 
 ######################################################
 
@@ -44,7 +44,7 @@ userslist = ['chandrahas','admin','guest','frontenduser','dev']
 @app.route('/')
 def index():
     listusers=lusers()
-    return render_template('index.html',listusers=listusers)
+    return render_template('index.html',listusers='Users: ' + str(listusers))
 
 @app.route('/auth', methods=['GET','POST'])
 def login():
