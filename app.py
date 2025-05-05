@@ -30,9 +30,9 @@ def init_db():
         db.commit()
 
 #list of users
-def lusers():
+def lusers(cols='*'):
     db = get_db()
-    cur = db.execute('SELECT * FROM users')
+    cur = db.execute('SELECT {1} FROM users'.format(cols))
     users = cur.fetchall()
     return 'Users: ' + str(users)
 
@@ -54,10 +54,18 @@ def login():
         return render_template('login.html')
     elif request.method=='POST':
         username=request.form['username']
+        password=request.form['password']
+        
         print('Username:',username)
-        if username in userslist:
-            session['username']=username
-            return redirect(url_for('dashboard'))
+        
+        listusers=lusers('username,password')
+        usersdict=dict(listusers)
+        usernames=[x[0] for x in listusers]
+        passwords=[x[1] for x in listusers]
+        if username in usernames:
+            if password == usersdict[username]:
+                session['username']=username
+                return redirect(url_for('dashboard'))
         else:
             return render_template('login.html')
     else:
