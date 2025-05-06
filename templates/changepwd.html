@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title%}Change Password{%endblock%}
+
+{%block content%}
+<div class="container align-center">
+	{% if message %}
+  <div class="alert alert-danger mb-3" role="alert">
+	  {{message}}
+  </div>
+  {% endif %}
+	<h3 class='mb-3'>Hi {{username}}, change your password here.</h3>
+		<form class="g-3" method='POST' action='/changepwd'>
+		<div class="row form-floating col-md-3 mb-3">
+			<input type="password" name='new_password' class="form-control" id="floatingNewPassword" placeholder="New Password">
+			<label for="floatingNewPassword">New Password</label>
+		</div>
+		<div class="row form-floating col-md-3 mb-3">
+			<input type="password" class="form-control" name='confirm_password' id="floatingConfirmPassword" placeholder="Confirm Password">
+			<label for="floatingConfirmPassword">Confirm Password</label>
+		</div>
+		<div class="row form-floating col-md-3 mb-3">
+			<button type="submit" class="btn btn-primary">Update</button>
+			<button type="reset" class="btn btn-primary">Reset</button>
+		</div>
+		</form>
+	</div>
+{%endblock%}
+
+{%block login %} <a class="btn btn-success" href="/logout" role="button">Logout</a>
+{%endblock%}
+
+{% block nav_menuitem%}
+<li class="nav-item dropdown">
+	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	  My Account
+	</a>
+	<ul class="dropdown-menu">
+	  <li><a class="dropdown-item" href="#">My Profile</a></li>
+	  <li><a class="dropdown-item" href="/changepwd">Change Password</a></li>
+	  <li><hr class="dropdown-divider"></li>
+	  <li><a class="dropdown-item" href="/logout">Logout</a></li>
+	</ul>
+</li>
+{%endblock%}

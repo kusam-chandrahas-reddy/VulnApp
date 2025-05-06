@@ -82,6 +82,37 @@ def login():
     else:
         return 'Unsupported Method'
 
+@app.route('/changepwd')
+def password():
+    if 'username' in session:
+        if request.method=='GET':
+            return render_template('changepwd.html',username=session.get('username'))
+        elif request.method=='POST':
+            user=session.get('username')
+            if 'new_password' in request.form and 'confirm_password' in request.form and 'confirmchange' not in request.form:
+                np=request.form['new_password']
+                cp=request.form['confirm_password']
+                if cp != np:
+                    return render_template('changepwd.html',username=session.get('username'),message='Entered passwords are mismatching')
+                session['new_password']=np
+                return render_template('confirmchangepwd.html',username=session.get('username'))
+            elif 'new_password' not in request.form and 'confirm_password' not in request.form and 'confirmchange' in request.form and 'new_password' in session:
+                confirm=request.form['confirmchange']
+                if confirm=='Yes':
+                    query='UPDATE users SET password = ? WHERE username= ? ;'
+                    data=(session.get('new_password'),session.get('username'))
+                    pass
+                elif confirm=='No':
+                    return render_template('changepwd.html',username=session.get('username'),message='Password is Not Updated')
+                else:
+                    return render_template('changepwd.html',username=session.get('username'),message='Invalid Request is sent. Please try again!!!')
+            else:
+                return render_template('changepwd.html',username=session.get('username'),message='Invalid Request is sent. Please try again!!!')
+                
+    else:
+        return redirect(url_for('login'))
+
+
 @app.route('/dashboard')
 def dashboard():
     if 'username' in session:
