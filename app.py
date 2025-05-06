@@ -89,7 +89,7 @@ def login():
 def password():
     if 'username' in session:
         if request.method=='GET':
-            del session['new_password']
+            if 'new_password' in session: del session['new_password']
             response = make_response(render_template('changepwd.html',username=session.get('username')))
             #response.headers['Access-Control-Allow-Origin']= '*'
             return response
