@@ -82,7 +82,7 @@ def login():
     else:
         return 'Unsupported Method'
 
-@app.route('/changepwd')
+@app.route('/changepwd', methods=['GET','POST'])
 def password():
     if 'username' in session:
         if request.method=='GET':
