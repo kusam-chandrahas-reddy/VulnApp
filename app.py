@@ -1,7 +1,10 @@
 from flask import Flask, redirect, render_template, request, url_for, make_response, session
+from flask_cors import CORS
+
 app =Flask(__name__)
 app.secret_key=b'mypowerfulsecretkey'
 
+CORS(app, resources={r"/changepwd/*": {"origins": "*"}})
 
 #########################
 
@@ -87,7 +90,9 @@ def password():
     if 'username' in session:
         if request.method=='GET':
             del session['new_password']
-            return render_template('changepwd.html',username=session.get('username'))
+            response = make_response(render_template('changepwd.html',username=session.get('username')))
+            response.set_cookie('Access-Control-Allow-Origin', '*')
+            return response
         elif request.method=='POST':
             user=session.get('username')
             if 'new_password' in request.form and 'confirm_password' in request.form and 'confirmchange' not in request.form:
