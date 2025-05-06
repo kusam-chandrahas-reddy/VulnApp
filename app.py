@@ -4,7 +4,7 @@ from flask_cors import CORS
 app =Flask(__name__)
 app.secret_key=b'mypowerfulsecretkey'
 
-CORS(app, supports_credentials=True,resources={r"/changepwd/*": {"origins": "*"}})
+CORS(app, resources={r"/changepwd/*": {"origins": "*", "allow_credentials": True}})
 
 #########################
 
