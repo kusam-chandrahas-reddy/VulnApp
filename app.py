@@ -101,7 +101,12 @@ def password():
                 if confirm=='Yes':
                     query='UPDATE users SET password = ? WHERE username= ? ;'
                     data=(session.get('new_password'),session.get('username'))
-                    pass
+                    out=runquery(query,data)
+                    if out==1:
+                        return render_template('changepwd.html',username=session.get('username'),message='Password updated Successfully!!!')
+                    else:
+                        return render_template('changepwd.html',username=session.get('username'),message='Error occurred while updating password, please try later.')
+                    
                 elif confirm=='No':
                     return render_template('changepwd.html',username=session.get('username'),message='Password is Not Updated')
                 else:
