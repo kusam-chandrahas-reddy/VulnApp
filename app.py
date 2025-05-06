@@ -86,6 +86,7 @@ def login():
 def password():
     if 'username' in session:
         if request.method=='GET':
+            del session['new_password']
             return render_template('changepwd.html',username=session.get('username'))
         elif request.method=='POST':
             user=session.get('username')
