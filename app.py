@@ -1,5 +1,5 @@
 from flask import Flask, redirect, render_template, request, url_for, make_response, session
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app =Flask(__name__)
 app.secret_key=b'mypowerfulsecretkey'
@@ -88,6 +88,7 @@ def login():
         return 'Unsupported Method'
 
 @app.route('/changepwd', methods=['GET','POST'])
+@cross_origin()
 def password():
     if 'username' in session:
         if request.method=='GET':
