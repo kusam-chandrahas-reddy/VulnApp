@@ -88,7 +88,7 @@ def login():
         return 'Unsupported Method'
 
 @app.route('/changepwd', methods=['GET','POST'])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 def password():
     if 'username' in session:
         if request.method=='GET':
