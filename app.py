@@ -91,7 +91,7 @@ def password():
         if request.method=='GET':
             if 'new_password' in session: del session['new_password']
             response = make_response(render_template('changepwd.html',username=session.get('username')))
-            response.headers['Access-Control-Allow-Origin']= '*'
+            response.headers['Access-Control-Allow-Origin']= 'http://192.168.29.8:5500'
             response.headers['Access-Control-Allow-Credentials']= 'true'
             return response
         elif request.method=='POST':
