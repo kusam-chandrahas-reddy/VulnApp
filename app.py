@@ -5,7 +5,8 @@ app =Flask(__name__)
 app.secret_key=b'mypowerfulsecretkey'
 
 cors = CORS(app, resources={
-    r"/changepwd": {"origins": "*"}}, supports_credentials= True)
+    r"/changepwd": {"origins": "*"}
+}, supports_credentials=True)
 
 #########################
 
