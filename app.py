@@ -4,9 +4,7 @@ from flask_cors import CORS, cross_origin
 app =Flask(__name__)
 app.secret_key=b'mypowerfulsecretkey'
 
-cors = CORS(app, resources={
-    r"/changepwd": {"origins": "http://localhost:5500"}
-}, supports_credentials=True)
+#cors = CORS(app, resources={ r"/changepwd": {"origins": "http://localhost:5500"}}, supports_credentials=True)
 
 #########################
 
@@ -93,7 +91,8 @@ def password():
         if request.method=='GET':
             if 'new_password' in session: del session['new_password']
             response = make_response(render_template('changepwd.html',username=session.get('username')))
-            #response.headers['Access-Control-Allow-Origin']= '*'
+            response.headers['Access-Control-Allow-Origin']= '*'
+            response.headers['Access-Control-Allow-Credentials']= 'true'
             return response
         elif request.method=='POST':
             user=session.get('username')
