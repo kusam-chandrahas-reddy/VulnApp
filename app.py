@@ -100,11 +100,11 @@ def myprofile():
         print('username='+str(session.get('username')))
         listusers=lusers('username,email,fullname','username=\''+str(session.get('username'))+'\'')
         profile=listusers[0]
-        return render_template('profile.html',profile)
+        return render_template('profile.html',profile=profile)
     elif request.method=='POST':
-        return render_template('profile.html',profile)
+        return render_template('profile.html')
     else:
-        return render_template('profile.html',profile)
+        return render_template('profile.html')
 
 @app.route('/changepwd', methods=['GET','POST'])
 def password():
