@@ -96,17 +96,28 @@ def login():
 def myprofile():
     if 'username' not in session:
         return redirect(url_for('login'))
-    if request.method=='GET':
+    if request.method=='POST':
+        #update profile
+        query='UPDATE users SET fullname = ? , email = ? WHERE username= ? ;'
+        data=(request.form.get('fullname'),request.form.get('email'),session.get('username'))
+        out=runquery(query,data)
+        
+        
+        #get profile
         profile=('username','email','full_name')
         print('username='+str(session.get('username')))
         listusers=lusers('username,email,fullname','username=\''+str(session.get('username'))+'\'')
         profile=dict(zip(profile,listusers[0]))
-        print(profile)
-        return render_template('profile.html',profile=profile)
-    elif request.method=='POST':
-        return render_template('profile.html')
+        return render_template('profile.html',profile=profile, message='Updated Successfully')
     else:
-        return render_template('profile.html')
+        profile=('username','email','full_name')
+        #print('username='+str(session.get('username')))
+        listusers=lusers('username,email,fullname','username=\''+str(session.get('username'))+'\'')
+        profile=dict(zip(profile,listusers[0]))
+        #print(profile)
+        return render_template('profile.html',profile=profile)
+    
+
 
 @app.route('/changepwd', methods=['GET','POST'])
 def password():

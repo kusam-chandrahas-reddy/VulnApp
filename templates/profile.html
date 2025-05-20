@@ -7,20 +7,19 @@
 {%block content%}
 
 <h1>This is You in our System</h1>
-{% if profile %}{{profile}}{%endif%}
 <br>
 <div>
 <table>
   <tr>
-    <td>Username</td>
+    <td name='username'>Username</td>
     <td>{% if profile %}{{profile.username}}{% else %}N/A{%endif%}</td>
   </tr>
   <tr>
-    <td>Full Name</td>
+    <td name='fullname'>Full Name</td>
     <td>{% if profile %}{{profile.full_name}}{% else %}N/A{%endif%}</td>
   </tr>
   <tr>
-    <td>Email</td>
+    <td name='email'>Email</td>
     <td>{% if profile %}{{profile.email}}{% else %}N/A{%endif%}</td>
   </tr>
   <tr>
