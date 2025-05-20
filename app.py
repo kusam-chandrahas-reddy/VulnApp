@@ -39,6 +39,7 @@ def lusers(cols='*',where=None):
         cur = db.execute('SELECT {} FROM users'.format(cols))
     else:
         q='SELECT {} FROM USERS WHERE {};'.format(cols,where)
+        print(q)
         cur=db.execute(q)
         
     users = cur.fetchall()
@@ -100,6 +101,7 @@ def myprofile():
         print('username='+str(session.get('username')))
         listusers=lusers('username,email,fullname','username=\''+str(session.get('username'))+'\'')
         profile=listusers[0]
+        print(profile)
         return render_template('profile.html',profile=profile)
     elif request.method=='POST':
         return render_template('profile.html')
