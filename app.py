@@ -91,7 +91,7 @@ def login():
 
 
 @app.route('/myprofile', methods=['GET','POST'])
-def password():
+def myprofile():
     if 'username' not in session:
         return redirect(url_for('login'))
     if request.method=='GET':
@@ -103,6 +103,7 @@ def password():
         return render_template('profile.html',profile)
     else:
         return render_template('profile.html',profile)
+
 @app.route('/changepwd', methods=['GET','POST'])
 def password():
     if 'username' in session:
