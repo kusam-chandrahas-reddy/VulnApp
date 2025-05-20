@@ -97,10 +97,10 @@ def myprofile():
     if 'username' not in session:
         return redirect(url_for('login'))
     if request.method=='GET':
-        profile={}
+        profile=('username','email','full_name')
         print('username='+str(session.get('username')))
         listusers=lusers('username,email,fullname','username=\''+str(session.get('username'))+'\'')
-        profile=listusers[0]
+        profile=dict(zip(profile,listusers[0])
         print(profile)
         return render_template('profile.html',profile=profile)
     elif request.method=='POST':
