@@ -100,6 +100,7 @@ def myprofile():
         #update profile
         query='UPDATE users SET fullname = ? , email = ? WHERE username= ? ;'
         data=(request.form.get('fullname'),request.form.get('email'),session.get('username'))
+        print(data)
         out=runquery(query,data)
         
         
