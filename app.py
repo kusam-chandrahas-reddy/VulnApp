@@ -33,9 +33,13 @@ def init_db():
         db.commit()
 
 #list of users
-def lusers(cols='*'):
+def lusers(cols='*',where=None):
     db = get_db()
-    cur = db.execute('SELECT {} FROM users'.format(cols))
+    if where is None:
+        cur = db.execute('SELECT {} FROM users'.format(cols))
+    else:
+        cur=db.execute('SELECT {} FROM USERS WHERE {}'.format(cols,where))
+        
     users = cur.fetchall()
     return users
 
@@ -85,6 +89,17 @@ def login():
     else:
         return 'Unsupported Method'
 
+
+@app.route('/myprofile', methods=['GET','POST'])
+def password():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    if request.method=='GET':
+        profile={}
+        listusers=lusers('username,email,fullname','username='+str(session.get('username')))
+        profile=listusers[0]
+        return render_template('profile.html',profile)
+    
 @app.route('/changepwd', methods=['GET','POST'])
 def password():
     if 'username' in session:
