@@ -99,7 +99,11 @@ def myprofile():
     if request.method=='POST':
         #update profile
         query='UPDATE users SET fullname = ? , email = ? WHERE username= ? ;'
-        data=(request.form['fullname'],request.form['email'],session.get('username'))
+        if 'fullname' in x=request.form: request.form['fullname']
+        else: x=None
+        if 'email' in y=request.form: request.form['email']
+        else: y=None
+        data=(x,y,session.get('username'))
         print(data)
         out=runquery(query,data)
         
