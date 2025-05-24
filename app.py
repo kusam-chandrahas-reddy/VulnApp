@@ -99,6 +99,7 @@ def myprofile():
     if request.method=='POST':
         #update profile
         query='UPDATE users SET fullname = ? , email = ? WHERE username= ? ;'
+        print(request.form.to_dict())
         if 'fullname' in request.form: x=request.form['fullname']
         else: x=None
         if 'email' in request.form: y=request.form['email']
