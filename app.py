@@ -61,8 +61,10 @@ userslist = ['chandrahas','admin','guest','frontenduser','dev']
 
 @app.route('/')
 def index():
-    listusers=lusers()
-    return render_template('index.html',listusers='Users: ' + str(listusers))
+    if 'username' not in session:
+        listusers=lusers()
+        return render_template('index.html',listusers='Users: ' + str(listusers))
+    return redirect(url_for('dashboard'))
 
 @app.route('/auth', methods=['GET','POST'])
 def login():
@@ -114,7 +116,7 @@ def myprofile():
         print('username='+str(session.get('username')))
         listusers=lusers('username,email,fullname','username=\''+str(session.get('username'))+'\'')
         profile=dict(zip(profile,listusers[0]))
-        return render_template('profile.html',profile=profile, message='Updated Successfully')
+        return render_template('profile.html',profile=profile, message='Profile Updated Successfully')
     else:
         profile=('username','email','full_name')
         #print('username='+str(session.get('username')))
