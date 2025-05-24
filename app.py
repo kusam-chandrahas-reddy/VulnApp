@@ -184,7 +184,7 @@ def error404(error):
 def logout():
     if 'username' in session:
         session.pop('username')
-        session.clear()
+    session.clear()
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET','POST'])
