@@ -133,9 +133,6 @@ def password():
         if request.method=='GET':
             if 'new_password' in session: del session['new_password']
             response = make_response(render_template('changepwd.html',username=session.get('username')))
-           # response.headers['Access-Control-Allow-Origin']= 'http://192.168.29.8:5500'
-           # response.headers['Access-Control-Allow-Credentials']= 'true'
-           # response.headers['Access-Control-Allow-Methods']='POST'
             return response
         elif request.method=='POST':
             user=session.get('username')
@@ -163,6 +160,8 @@ def password():
                     return render_template('changepwd.html',username=session.get('username'),message='Invalid Request is sent. Please try again!!!')
             else:
                 return render_template('changepwd.html',username=session.get('username'),message='Invalid Request is sent. Please try again!!!')
+        else:
+            return render_template('changepwd.html',username=session.get('username'),message='Invalid Request is sent. Please try again!!!')
                 
     else:
         return redirect(url_for('login'))
