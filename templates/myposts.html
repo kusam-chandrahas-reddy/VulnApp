@@ -13,25 +13,20 @@
 <div class="alert alert-warning mb-3" role="alert">
 	{{message}}
 </div>
-{% endif %} 
-<table class="table table-bordered table-sm">
-<tr>
-    <td name='username'>Username</td>
-    <td>{% if profile %}{{profile.username}}{% else %}N/A{%endif%}</td>
-  </tr>
+{% endif %}
+{% if posts%}
+<table class="table-bordered table-sm">
+  <tr><td name='date'>Date</td><td name='fullname'>Post Heading</td></tr>
+{% for post in posts%}
   <tr>
-    <td name='fullname'>Full Name</td>
-    <td>{% if profile %}{{profile.full_name}}{% else %}N/A{%endif%}</td>
-  </tr>
-  <tr>
-    <td name='email'>Email</td>
-    <td>{% if profile %}{{profile.email}}{% else %}N/A{%endif%}</td>
-  </tr>
-  <tr>
-    <td><a class="btn btn-success" role='button' href='/changepwd'>Change Password</a></td>
+    <td>{{post.dt}}</td>
+    <td>{{post.post_heading}}</td>
+    <td><a class="btn btn-success" role='button' href={{'/post/'+post.id | string}}>Open</a></td>
   </tr>
 
+  {% endfor %}
 </table>
+{% endif %}
 </div>
 {%endblock%}
 

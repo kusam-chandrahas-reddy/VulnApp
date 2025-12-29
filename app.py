@@ -1,9 +1,30 @@
+from datetime import timedelta
+import sys
 from flask import Flask, redirect, render_template, request, url_for, make_response, session
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS, cross_origin # type: ignore
+from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
+
 
 app =Flask(__name__)
 app.secret_key=b'mypowerfulsecretkey'
 
+#app.config['PERMANENT_SESSION_LIFETIME'] = False#timedelta(minutes=30)
+app.config["SESSION_TYPE"] = "sqlalchemy"
+app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///session_db.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+session_db=SQLAlchemy(app)
+app.config['SESSION_SQLALCHEMY']=session_db
+#with app.app_context():session_db.create_all()
+
+#app.config["SESSION_TYPE"] = "filesystem"
+s=Session(app)
+
+
+#s.init_app(app)
+
+#sys.exit(0)
 #cors = CORS(app, resources={ r"/changepwd": {"origins": "http://localhost:5500"}}, supports_credentials=True)
 
 #########################
@@ -85,6 +106,7 @@ def login():
         if username in usernames:
             if password == usersdict[username]:
                 session['username']=username
+                session['login']=True
                 return redirect(url_for('dashboard'))
             else:
                 return render_template('login.html',message="Password is incorrect")
@@ -96,6 +118,7 @@ def login():
 
 @app.route('/myprofile', methods=['GET','POST'])
 def myprofile():
+    print(session)
     if 'username' not in session:
         return redirect(url_for('login'))
     if request.method=='POST':
@@ -126,6 +149,24 @@ def myprofile():
         return render_template('profile.html',profile=profile)
     
 
+@app.route('/myposts', methods=['GET'])
+def myposts():
+    print(session)
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    if request.method=='GET':
+        #update profile
+        query='SELECT * from Posts WHERE author= ? ;'
+        data=(session.get('username'),)
+        db = get_db()
+        cur=db.cursor()
+        cur.execute(query,data)
+        lp=cur.fetchall()
+        heads=['id','author','post_heading','post_data','dt']
+        posts=[dict(zip(heads,i)) for i in lp]
+        print(posts)
+        return render_template('myposts.html',posts=posts, message='My Posts')
+
 
 @app.route('/changepwd', methods=['GET','POST'])
 def password():
@@ -150,6 +191,7 @@ def password():
                     data=(session.get('new_password'),session.get('username'))
                     out=runquery(query,data)
                     if out==1:
+                        if 'new_password' in session: del session['new_password']
                         return render_template('changepwd.html',username=session.get('username'),message='Password updated Successfully!!!')
                     else:
                         return render_template('changepwd.html',username=session.get('username'),message='Error occurred while updating password, please try later.')
@@ -182,9 +224,13 @@ def error404(error):
 
 @app.route('/logout')
 def logout():
-    if 'username' in session:
-        session.pop('username')
+    #if 'username' in session:
+    #    session.pop('username',None)
+    #    session.pop('login',None)
+    print(session)
     session.clear()
+    print('Session cleared')
+    print(session)
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET','POST'])
